@@ -23,7 +23,7 @@ Common API for all public keys.
 import base64
 from binascii import unhexlify
 import os
-from hashlib import md5
+from hashlib import sha512, md5, sha256
 
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
@@ -139,16 +139,55 @@ class PKey(object):
         """
         return False
 
-    def get_fingerprint(self):
+    def get_sha256_fingerprint(self):
+        """
+        Returns an openssh SHA256 fingerprint of the public part of this key.
+        SHA256 fingerprint is calculated by base64 encoding the sha256 digest
+        of the key and then removing the base64 trailing == chars
+        Nothing secret is revealed.
+
+        :return:
+            an 43-byte `string <str>` (base64) of the SHA256 fingerprint,
+            in SSH format.
+        """
+        return base64.b64encode(
+            b(sha256(self.asbytes()).digest()))[:-1]
+
+    def get_sha512_fingerprint(self):
+        """
+        Returns an openssh SHA512 fingerprint of the public part of this key.
+        SHA512 fingerprint is calculated by base64 encoding the sha512 digest
+        of the key and then removing the two base64 trailing == chars
+        Nothing secret is revealed.
+
+        :return:
+            an 86-byte `string <str>` (base64) of the SHA512 fingerprint,
+            in SSH format.
+        """
+        return base64.b64encode(
+            b(sha512(self.asbytes()).digest()))[:-2]
+
+    def get_md5_fingerprint(self):
         """
         Return an MD5 fingerprint of the public part of this key.  Nothing
-        secret is revealed.
+        Nothing secret is revealed.
 
         :return:
             a 16-byte `string <str>` (binary) of the MD5 fingerprint, in SSH
             format.
         """
         return md5(self.asbytes()).digest()
+
+    def get_fingerprint(self):
+        """
+        Returns an openssh SHA256 fingerprint of the public part of this key.
+        Nothing secret is revealed.
+
+        :return:
+            an 43-byte `string <str>` (base64) of the SHA256 fingerprint,
+            in SSH format.
+        """
+        return self.get_sha256_fingerprint()
 
     def get_base64(self):
         """

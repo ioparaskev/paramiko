@@ -155,8 +155,8 @@ class UtilTest(unittest.TestCase):
             self.assertEqual(2, len(hostdict))
             self.assertEqual(1, len(list(hostdict.values())[0]))
             self.assertEqual(1, len(list(hostdict.values())[1]))
-            fp = hexlify(hostdict['secure.example.com']['ssh-rsa'].get_fingerprint()).upper()
-            self.assertEqual(b'E6684DB30E109B67B70FF1DC5C7F1363', fp)
+            fp = hostdict['secure.example.com']['ssh-rsa'].get_fingerprint()
+            self.assertEqual(b'J2oYDy9XSb/Ux8ajSxhTETvzev1aNYQMke8t7OuNGgQ', fp)
         finally:
             os.unlink('hostfile.temp')
 

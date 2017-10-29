@@ -35,6 +35,7 @@ from tempfile import mkstemp
 
 import paramiko
 from paramiko.pkey import PublicBlob
+from paramiko.py3compat import b
 from paramiko.common import PY2
 from paramiko.ssh_exception import SSHException, AuthenticationException
 
@@ -46,10 +47,10 @@ requires_gss_auth = unittest.skipUnless(
 )
 
 FINGERPRINTS = {
-    'ssh-dss': b'\x44\x78\xf0\xb9\xa2\x3c\xc5\x18\x20\x09\xff\x75\x5b\xc1\xd2\x6c',
-    'ssh-rsa': b'\x60\x73\x38\x44\xcb\x51\x86\x65\x7f\xde\xda\xa2\x2b\x5a\x57\xd5',
-    'ecdsa-sha2-nistp256': b'\x25\x19\xeb\x55\xe6\xa1\x47\xff\x4f\x38\xd2\x75\x6f\xa5\xd5\x60',
-    'ssh-ed25519': b'\xb3\xd5"\xaa\xf9u^\xe8\xcd\x0e\xea\x02\xb9)\xa2\x80',
+    'ssh-dss': "uHwwykG099f4M4kfzvFpKCTino0/P03DRbAidpAmPm0",
+    'ssh-rsa': "OhNL391d/beeFnxxg18AwWVYTAHww+D4djEE7Co0Yng",
+    'ecdsa-sha2-nistp256': "BrQG04oNKUETjKCeL4ifkARASg3yxS/pUHl3wWM26Yg",
+    'ssh-ed25519': "J6VESFdD3xSChn8y9PzWzeF+1tl892mOy2TqkMLO4ow",
 }
 
 
@@ -82,7 +83,7 @@ class NullServer(paramiko.ServerInterface):
         # Base check: allowed auth type & fingerprint matches
         happy = (
             key.get_name() in self.__allowed_keys and
-            key.get_fingerprint() == expected
+            b(key.get_fingerprint()) == b(expected)
         )
         # Secondary check: if test wants assertions about cert data
         if (

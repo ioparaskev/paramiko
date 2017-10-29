@@ -68,8 +68,8 @@ class HostKeysTest (unittest.TestCase):
         self.assertEqual(2, len(hostdict))
         self.assertEqual(1, len(list(hostdict.values())[0]))
         self.assertEqual(1, len(list(hostdict.values())[1]))
-        fp = hexlify(hostdict['secure.example.com']['ssh-rsa'].get_fingerprint()).upper()
-        self.assertEqual(b'E6684DB30E109B67B70FF1DC5C7F1363', fp)
+        fp = hostdict['secure.example.com']['ssh-rsa'].get_fingerprint()
+        self.assertEqual(b"J2oYDy9XSb/Ux8ajSxhTETvzev1aNYQMke8t7OuNGgQ", fp)
 
     def test_2_add(self):
         hostdict = paramiko.HostKeys('hostfile.temp')
@@ -78,8 +78,8 @@ class HostKeysTest (unittest.TestCase):
         hostdict.add(hh, 'ssh-rsa', key)
         self.assertEqual(3, len(list(hostdict)))
         x = hostdict['foo.example.com']
-        fp = hexlify(x['ssh-rsa'].get_fingerprint()).upper()
-        self.assertEqual(b'7EC91BB336CB6D810B124B1353C32396', fp)
+        fp = x['ssh-rsa'].get_fingerprint()
+        self.assertEqual(b"uLbp9hAkNOXc796E7GAWFf6cMqT/v3OnaJJzzwQuzcM", fp)
         self.assertTrue(hostdict.check('foo.example.com', key))
 
     def test_3_dict(self):
@@ -90,8 +90,8 @@ class HostKeysTest (unittest.TestCase):
         self.assertTrue('not.example.com' not in hostdict)
         x = hostdict.get('secure.example.com', None)
         self.assertTrue(x is not None)
-        fp = hexlify(x['ssh-rsa'].get_fingerprint()).upper()
-        self.assertEqual(b'E6684DB30E109B67B70FF1DC5C7F1363', fp)
+        fp = x['ssh-rsa'].get_fingerprint()
+        self.assertEqual(b'J2oYDy9XSb/Ux8ajSxhTETvzev1aNYQMke8t7OuNGgQ', fp)
         i = 0
         for key in hostdict:
             i += 1
@@ -112,10 +112,10 @@ class HostKeysTest (unittest.TestCase):
         self.assertEqual(2, len(list(hostdict.values())[0]))
         self.assertEqual(1, len(list(hostdict.values())[1]))
         self.assertEqual(1, len(list(hostdict.values())[2]))
-        fp = hexlify(hostdict['secure.example.com']['ssh-rsa'].get_fingerprint()).upper()
-        self.assertEqual(b'7EC91BB336CB6D810B124B1353C32396', fp)
-        fp = hexlify(hostdict['secure.example.com']['ssh-dss'].get_fingerprint()).upper()
-        self.assertEqual(b'4478F0B9A23CC5182009FF755BC1D26C', fp)
+        fp = hostdict['secure.example.com']['ssh-rsa'].get_fingerprint()
+        self.assertEqual(b'uLbp9hAkNOXc796E7GAWFf6cMqT/v3OnaJJzzwQuzcM', fp)
+        fp = hostdict['secure.example.com']['ssh-dss'].get_fingerprint()
+        self.assertEqual(b'uHwwykG099f4M4kfzvFpKCTino0/P03DRbAidpAmPm0', fp)
 
     def test_delitem(self):
         hostdict = paramiko.HostKeys('hostfile.temp')

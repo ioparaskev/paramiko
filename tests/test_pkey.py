@@ -40,11 +40,26 @@ PUB_ECDSA_256 = 'ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHA
 PUB_ECDSA_384 = 'ecdsa-sha2-nistp384 AAAAE2VjZHNhLXNoYTItbmlzdHAzODQAAAAIbmlzdHAzODQAAABhBBbGibQLW9AAZiGN2hEQxWYYoFaWKwN3PKSaDJSMqmIn1Z9sgRUuw8Y/w502OGvXL/wFk0i2z50l3pWZjD7gfMH7gX5TUiCzwrQkS+Hn1U2S9aF5WJp0NcIzYxXw2r4M2A=='
 PUB_ECDSA_521 = 'ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBACaOaFLZGuxa5AW16qj6VLypFbLrEWrt9AZUloCMefxO8bNLjK/O5g0rAVasar1TnyHE9qj4NwzANZASWjQNbc4MAG8vzqezFwLIn/kNyNTsXNfqEko9OgHZknlj2Z79dwTJcRAL4QLcT5aND0EHZLB2fAUDXiWIb2j4rg1mwPlBMiBXA=='
 
-FINGER_RSA = '1024 60:73:38:44:cb:51:86:65:7f:de:da:a2:2b:5a:57:d5'
-FINGER_DSS = '1024 44:78:f0:b9:a2:3c:c5:18:20:09:ff:75:5b:c1:d2:6c'
-FINGER_ECDSA_256 = '256 25:19:eb:55:e6:a1:47:ff:4f:38:d2:75:6f:a5:d5:60'
-FINGER_ECDSA_384 = '384 c1:8d:a0:59:09:47:41:8e:a8:a6:07:01:29:23:b4:65'
-FINGER_ECDSA_521 = '521 44:58:22:52:12:33:16:0e:ce:0e:be:2c:7c:7e:cc:1e'
+FINGER_RSA = dict(keysize=1024,
+                  sha512="V6YHbcKCWF62Ilda7/T03ElUyDSLxjDwmP2A3W9cP3cnwmdxEDZPMoIfXwtkOYi8tcLeX1lYLJi0V1KO6PKOng",
+                  sha256="OhNL391d/beeFnxxg18AwWVYTAHww+D4djEE7Co0Yng",
+                  md5="60:73:38:44:cb:51:86:65:7f:de:da:a2:2b:5a:57:d5")
+FINGER_DSS = dict(keysize=1024,
+                  sha512="w9n6MwfRE3rDiWLOMb5Pt6cfJhyx3XnnZjCZmE3KsJH3ao/kpE8qCUU6qT8SROABKOSSaB7n5WfWx8G2Z1I4jA",
+                  sha256="uHwwykG099f4M4kfzvFpKCTino0/P03DRbAidpAmPm0",
+                  md5='44:78:f0:b9:a2:3c:c5:18:20:09:ff:75:5b:c1:d2:6c')
+FINGER_ECDSA_256 = dict(keysize=256,
+                        sha512="wGIsxFJeUc32Z1QfkYUQ8cGN9DbMgG0dMjurXnck3/LUEapfPjYBsaU/sKED+J/9sNufw11sRcydlBW556CZMQ",
+                        sha256="BrQG04oNKUETjKCeL4ifkARASg3yxS/pUHl3wWM26Yg",
+                        md5="25:19:eb:55:e6:a1:47:ff:4f:38:d2:75:6f:a5:d5:60")
+FINGER_ECDSA_384 = dict(keysize=384,
+                        sha512="/8yvWj+cZPaONlMHICQ/HHrwPzxLORglpQaaiuQwgSnujnZgx/XroWsqrG/zYTzGGWAtu4zYLjQtUMiI49iDTQ",
+                        sha256="gS77hXIdYORpQQz4zE2jGK/4A9oKIOnpl/41+VC7Nfs",
+                        md5='c1:8d:a0:59:09:47:41:8e:a8:a6:07:01:29:23:b4:65')
+FINGER_ECDSA_521 = dict(keysize=521,
+                        sha512="NECFlmrJN8bwjR5RUxqbYtnZ09Ivat/4ayn6YmpfD7fWWb3CN4491gCcU50AKtiXNIQf6Sr3xRjwM169JSt+kw",
+                        sha256="zdi2SEOxcegSe59/ROSPVwZQjHuuxRgyrazpXpeIdYM",
+                        md5='44:58:22:52:12:33:16:0e:ce:0e:be:2c:7c:7e:cc:1e')
 SIGNED_RSA = '20:d7:8a:31:21:cb:f7:92:12:f2:a4:89:37:f5:78:af:e6:16:b6:25:b9:97:3d:a2:cd:5f:ca:20:21:73:4c:ad:34:73:8f:20:77:28:e2:94:15:08:d8:91:40:7a:85:83:bf:18:37:95:dc:54:1a:9b:88:29:6c:73:ca:38:b4:04:f1:56:b9:f2:42:9d:52:1b:29:29:b4:4f:fd:c9:2d:af:47:d2:40:76:30:f3:63:45:0c:d9:1d:43:86:0f:1c:70:e2:93:12:34:f3:ac:c5:0a:2f:14:50:66:59:f1:88:ee:c1:4a:e9:d1:9c:4e:46:f0:0e:47:6f:38:74:f1:44:a8'
 
 RSA_PRIVATE_OUT = """\
@@ -121,6 +136,16 @@ class KeyTest(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def assert_key_fingerprints(self, key, expected):
+        self.assertEqual(b(expected.get("sha256")),
+                         key.get_fingerprint())
+        self.assertEqual(b(expected.get("sha256")),
+                         key.get_sha256_fingerprint())
+        self.assertEqual(b(expected.get("sha512")),
+                         key.get_sha512_fingerprint())
+        self.assertEqual(b(expected.get("md5").replace(":", "")),
+                         hexlify(key.get_md5_fingerprint()))
+
     def assert_keyfile_is_encrypted(self, keyfile):
         """
         A quick check that filename looks like an encrypted key.
@@ -141,9 +166,7 @@ class KeyTest(unittest.TestCase):
     def test_2_load_rsa(self):
         key = RSAKey.from_private_key_file(_support('test_rsa.key'))
         self.assertEqual('ssh-rsa', key.get_name())
-        exp_rsa = b(FINGER_RSA.split()[1].replace(':', ''))
-        my_rsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_rsa, my_rsa)
+        self.assert_key_fingerprints(key, FINGER_RSA)
         self.assertEqual(PUB_RSA.split()[1], key.get_base64())
         self.assertEqual(1024, key.get_bits())
 
@@ -157,18 +180,14 @@ class KeyTest(unittest.TestCase):
     def test_3_load_rsa_password(self):
         key = RSAKey.from_private_key_file(_support('test_rsa_password.key'), 'television')
         self.assertEqual('ssh-rsa', key.get_name())
-        exp_rsa = b(FINGER_RSA.split()[1].replace(':', ''))
-        my_rsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_rsa, my_rsa)
+        self.assert_key_fingerprints(key, FINGER_RSA)
         self.assertEqual(PUB_RSA.split()[1], key.get_base64())
         self.assertEqual(1024, key.get_bits())
 
     def test_4_load_dss(self):
         key = DSSKey.from_private_key_file(_support('test_dss.key'))
         self.assertEqual('ssh-dss', key.get_name())
-        exp_dss = b(FINGER_DSS.split()[1].replace(':', ''))
-        my_dss = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_dss, my_dss)
+        self.assert_key_fingerprints(key, FINGER_DSS)
         self.assertEqual(PUB_DSS.split()[1], key.get_base64())
         self.assertEqual(1024, key.get_bits())
 
@@ -182,9 +201,7 @@ class KeyTest(unittest.TestCase):
     def test_5_load_dss_password(self):
         key = DSSKey.from_private_key_file(_support('test_dss_password.key'), 'television')
         self.assertEqual('ssh-dss', key.get_name())
-        exp_dss = b(FINGER_DSS.split()[1].replace(':', ''))
-        my_dss = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_dss, my_dss)
+        self.assert_key_fingerprints(key, FINGER_DSS)
         self.assertEqual(PUB_DSS.split()[1], key.get_base64())
         self.assertEqual(1024, key.get_bits())
 
@@ -278,9 +295,7 @@ class KeyTest(unittest.TestCase):
     def test_10_load_ecdsa_256(self):
         key = ECDSAKey.from_private_key_file(_support('test_ecdsa_256.key'))
         self.assertEqual('ecdsa-sha2-nistp256', key.get_name())
-        exp_ecdsa = b(FINGER_ECDSA_256.split()[1].replace(':', ''))
-        my_ecdsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_ecdsa, my_ecdsa)
+        self.assert_key_fingerprints(key, FINGER_ECDSA_256)
         self.assertEqual(PUB_ECDSA_256.split()[1], key.get_base64())
         self.assertEqual(256, key.get_bits())
 
@@ -294,9 +309,7 @@ class KeyTest(unittest.TestCase):
     def test_11_load_ecdsa_password_256(self):
         key = ECDSAKey.from_private_key_file(_support('test_ecdsa_password_256.key'), b'television')
         self.assertEqual('ecdsa-sha2-nistp256', key.get_name())
-        exp_ecdsa = b(FINGER_ECDSA_256.split()[1].replace(':', ''))
-        my_ecdsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_ecdsa, my_ecdsa)
+        self.assert_key_fingerprints(key, FINGER_ECDSA_256)
         self.assertEqual(PUB_ECDSA_256.split()[1], key.get_base64())
         self.assertEqual(256, key.get_bits())
 
@@ -328,9 +341,7 @@ class KeyTest(unittest.TestCase):
     def test_14_load_ecdsa_384(self):
         key = ECDSAKey.from_private_key_file(_support('test_ecdsa_384.key'))
         self.assertEqual('ecdsa-sha2-nistp384', key.get_name())
-        exp_ecdsa = b(FINGER_ECDSA_384.split()[1].replace(':', ''))
-        my_ecdsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_ecdsa, my_ecdsa)
+        self.assert_key_fingerprints(key, FINGER_ECDSA_384)
         self.assertEqual(PUB_ECDSA_384.split()[1], key.get_base64())
         self.assertEqual(384, key.get_bits())
 
@@ -344,9 +355,7 @@ class KeyTest(unittest.TestCase):
     def test_15_load_ecdsa_password_384(self):
         key = ECDSAKey.from_private_key_file(_support('test_ecdsa_password_384.key'), b'television')
         self.assertEqual('ecdsa-sha2-nistp384', key.get_name())
-        exp_ecdsa = b(FINGER_ECDSA_384.split()[1].replace(':', ''))
-        my_ecdsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_ecdsa, my_ecdsa)
+        self.assert_key_fingerprints(key, FINGER_ECDSA_384)
         self.assertEqual(PUB_ECDSA_384.split()[1], key.get_base64())
         self.assertEqual(384, key.get_bits())
 
@@ -378,9 +387,7 @@ class KeyTest(unittest.TestCase):
     def test_18_load_ecdsa_521(self):
         key = ECDSAKey.from_private_key_file(_support('test_ecdsa_521.key'))
         self.assertEqual('ecdsa-sha2-nistp521', key.get_name())
-        exp_ecdsa = b(FINGER_ECDSA_521.split()[1].replace(':', ''))
-        my_ecdsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_ecdsa, my_ecdsa)
+        self.assert_key_fingerprints(key, FINGER_ECDSA_521)
         self.assertEqual(PUB_ECDSA_521.split()[1], key.get_base64())
         self.assertEqual(521, key.get_bits())
 
@@ -397,9 +404,7 @@ class KeyTest(unittest.TestCase):
     def test_19_load_ecdsa_password_521(self):
         key = ECDSAKey.from_private_key_file(_support('test_ecdsa_password_521.key'), b'television')
         self.assertEqual('ecdsa-sha2-nistp521', key.get_name())
-        exp_ecdsa = b(FINGER_ECDSA_521.split()[1].replace(':', ''))
-        my_ecdsa = hexlify(key.get_fingerprint())
-        self.assertEqual(exp_ecdsa, my_ecdsa)
+        self.assert_key_fingerprints(key, FINGER_ECDSA_521)
         self.assertEqual(PUB_ECDSA_521.split()[1], key.get_base64())
         self.assertEqual(521, key.get_bits())
 
