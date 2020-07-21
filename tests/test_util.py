@@ -20,7 +20,6 @@
 Some unit tests for utility functions.
 """
 
-from binascii import hexlify
 import errno
 import os
 from hashlib import sha1
@@ -102,10 +101,10 @@ class UtilTest(unittest.TestCase):
             assert 2 == len(hostdict)
             assert 1 == len(list(hostdict.values())[0])
             assert 1 == len(list(hostdict.values())[1])
-            fp = hexlify(
-                hostdict["secure.example.com"]["ssh-rsa"].get_fingerprint()
-            ).upper()
-            assert b"E6684DB30E109B67B70FF1DC5C7F1363" == fp
+            fp = hostdict["secure.example.com"]["ssh-rsa"].get_fingerprint()
+            self.assertEqual(
+                b"J2oYDy9XSb/Ux8ajSxhTETvzev1aNYQMke8t7OuNGgQ", fp
+            )
         finally:
             os.unlink("hostfile.temp")
 

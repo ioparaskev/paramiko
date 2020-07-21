@@ -220,7 +220,7 @@ class PKey(object):
             md5=self.get_md5_fingerprint,
         )
 
-    def get_fingerprint(self, algorithm="md5"):
+    def get_fingerprint(self, algorithm="sha256"):
         """
         Returns an openssh fingerprint of the public part of this key.
         Nothing secret is revealed.

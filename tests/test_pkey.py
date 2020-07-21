@@ -168,10 +168,7 @@ class KeyTest(unittest.TestCase):
         pass
 
     def assert_key_fingerprints(self, key, expected):
-        self.assertEqual(
-            b(expected.get("md5").replace(":", "")),
-            hexlify(key.get_fingerprint()),
-        )
+        self.assertEqual(b(expected.get("sha256")), key.get_fingerprint())
         self.assertEqual(
             b(expected.get("sha256")), key.get_sha256_fingerprint()
         )
